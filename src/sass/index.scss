@@ -1,0 +1,16 @@
+@import "normalize";
+
+$break-small: 480px;
+$break-large: 1200px;
+
+$link-color: #d4d9e0;
+$header-color: #444;
+$dropdown-color: #bbb;
+$font: sans-serif;
+
+body {
+  margin: 0;
+  font-family: $font;
+}
+
+@import "header";
