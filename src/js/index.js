@@ -1,19 +1,7 @@
-$( document ).ready(function() {
+const mobileDropdown = document.querySelector(".inactive");
+const hamburger = document.querySelector(".Header-links--mobile-hamburger");
 
-  $( ".cross" ).hide();
-  $( ".menu" ).hide();
-  $( ".hamburger" ).click(function() {
-    $( ".menu" ).slideToggle( "slow", function() {
-      $( ".hamburger" ).hide();
-      $( ".cross" ).show();
-    });
-  });
 
-  $( ".cross" ).click(function() {
-    $( ".menu" ).slideToggle( "slow", function() {
-      $( ".cross" ).hide();
-      $( ".hamburger" ).show();
-    });
-  });
-
+hamburger.addEventListener("click", function () {
+  mobileDropdown.classList.toggle("inactive");
 });
