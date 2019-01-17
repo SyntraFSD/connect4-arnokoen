@@ -2,6 +2,7 @@ var Register = document.querySelector('.Form-register');
 var Login = document.querySelector('.Form-login');
 var BtnRegister = document.querySelector('#Register');
 var BtnLogin = document.querySelector('#Login');
+var apiDomain = 'connect4.pienter.space/api/';
 
 function toggleForm() {
   Register.classList.toggle('inactive');
@@ -30,8 +31,16 @@ function login(event) {
   console.log(formData);
 }
 
+function register(event) {
+  event.preventDefault();
+  var formData = getFormData(register);
+  var request = new XMLHttpRequest();
+  request.addEventListener('readystatechange', function () {});
+}
+
 BtnRegister.addEventListener('click', toggleForm);
 BtnLogin.addEventListener('click', toggleForm);
 Login.addEventListener('submit', login);
+Register.addEventListener('submit', register);
 console.log("123");
 //# sourceMappingURL=login.js.map
