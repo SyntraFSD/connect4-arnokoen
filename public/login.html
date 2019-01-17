@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Connect Four</title>
   <link rel="stylesheet" href="css/login.css">
 </head>
@@ -40,15 +41,20 @@
 
 <main>
   <div>
-    <form class="Login">
+
+    <form class="Form-login">
+      <h2>Login</h2>
       <label> Email </label>
         <input type="email" placeholder="iemand@example.be">
       <label> Password </label>
         <input type="password" placeholder="Password">
-        <input type="submit" value="log in">
+        <input type="submit" value="Login">
+      <p class=".noLogin">No login yet? <a id="Register" href="#">Register here</a></p>
     </form>
-    <form class="Register">
+
+    <form class="Form-register inactive">
       <label> Name </label>
+      <h2>Register</h2>
       <input type="text" placeholder="John Doe">
       <label> Email </label>
       <input type="email" placeholder="iemand@example.be">
@@ -59,7 +65,8 @@
       <input type="submit" value="register">
     </form>
   </div>
-  <p>No login yet? <a href="#">Register here</a></p>
+  <p class="alreadyLogin inactive">Already have an account? <a id="Login" href="#">Login here</a></p>
+  <!-- TOGGLE PARAGRAPHS< -->
 </main>
 <script src="js/index.js"></script>
 <script src="js/login.js"></script>

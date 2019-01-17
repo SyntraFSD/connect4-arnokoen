@@ -21,14 +21,20 @@ main {
 
 
 form {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 40%;
-  padding: 25px;
+  width: 90%;
+  max-width: 15rem;
+  padding: 2rem 0;
 }
 
-
+.inactive {
+  display: none;
+}
 
 input {
   margin-bottom: 15px;
@@ -39,9 +45,9 @@ input {
 }
 
 div {
-  min-width: 350px;
-  width: 35%;
-  background: red;
+  max-width: 25rem;
+  width: 100%;
+  background: #95a5a6;
   position: relative;
   margin: 0 auto;
   margin-top: 25vh;
