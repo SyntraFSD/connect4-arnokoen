@@ -11,4 +11,42 @@ body {
   margin: 0;
   font-family: $font;
 }
+
+main {
+  display:flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 40%;
+  padding: 25px;
+}
+
+input {
+  margin-bottom: 15px;
+
+  &:last-of-type {
+    margin-top: 10px;
+  }
+}
+
+div {
+  min-width: 350px;
+  width: 35%;
+  background: red;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 25vh;
+}
+
+main p {
+  margin: 0 auto;
+  padding-top: 15px;
+}
 @import "header";
