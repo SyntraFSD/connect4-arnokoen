@@ -8,9 +8,22 @@ $header-color: #444;
 $dropdown-color: #bbb;
 $font: sans-serif;
 
+$footer-height: 5rem;
+
+html{
+  height: 100%;
+}
+
+
 body {
   margin: 0;
   font-family: $font;
+  position: relative;
+  min-height: 100%;
+  padding-bottom: $footer-height;
+  box-sizing: border-box;
 }
 
+
 @import "header";
+@import "footer";
