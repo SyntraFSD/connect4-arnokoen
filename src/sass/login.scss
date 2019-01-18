@@ -57,4 +57,18 @@ main p {
   margin: 0 auto;
   padding-top: 15px;
 }
+
+.login {
+  &-alert{
+    background-color: red;
+    border: 2px solid darkred;
+    border-radius: .3rem;
+    color: white;
+    padding: .5rem;
+    &.success{
+      background-color: green;
+      border: 2px solid darkgreen;
+    }
+  }
+}
 @import "header";

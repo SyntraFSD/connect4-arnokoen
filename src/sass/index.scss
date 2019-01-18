@@ -1,6 +1,9 @@
 @import "normalize";
 @import "_variables";
 
+@import "header";
+@import "footer";
+
 html{
   height: 100%;
 }
@@ -16,5 +19,3 @@ body {
 }
 
 
-@import "header";
-@import "footer";
