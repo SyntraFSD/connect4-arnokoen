@@ -57,4 +57,11 @@ main p {
   margin: 0 auto;
   padding-top: 15px;
 }
+
+.login {
+  &-alert{
+    background-color: red;
+    border
+  }
+}
 @import "header";

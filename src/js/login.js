@@ -1,33 +1,42 @@
-let Register = document.querySelector('.Form-register');
-let Login = document.querySelector('.Form-login');
-let BtnRegister = document.querySelector('#Register');
-let BtnLogin = document.querySelector('#Login');
+const Register = document.querySelector('.Form-register');
+const Login = document.querySelector('.Form-login');
+const BtnRegister = document.querySelector('#Register');
+const BtnLogin = document.querySelector('#Login');
+const loginAlert = document.querySelector('.login-alert');
 
 function toggleForm() {
   Register.classList.toggle('inactive');
   Login.classList.toggle('inactive');
 }
 
-function getFormData(event){
+function hideLoginAlert() {
+  loginAlert.classList.add('inactive');
+}
+
+function showLoginAlert(content) {
+  loginAlert.textContent = content;
+  loginAlert.classList.remove('inactive');
+}
+
+function getFormData() {
   const inputFields = Login.querySelectorAll('input');
   const formData = {};
-  inputFields.forEach(function(inputField) {
+  inputFields.forEach(function (inputField) {
     formData[inputField.name] = inputField.value;
   });
 
   console.log(formData);
 }
 
-function handleLoginRequest(event){
+function handleLoginRequest(event) {
   const request = event.target;
-  if(request.readyState === 4) {
-    if(request.status >= 200 && request.status < 300){
+  if (request.readyState === 4) {
+    const response = JSON.parse(request.responseText);
+    if (request.status >= 200 && request.status < 300) {
       console.log('succes');
       console.log(request);
-    }else{
-      console.log('error');
-      console.log(request);
-      window.alert("Login failed, try again")
+    } else if (request.status === 401) {
+      showLoginAlert(response.error);
     }
   }
 }
@@ -47,7 +56,7 @@ function register(event) {
   event.preventDefault();
   const formData = getFormData(register);
   const request = new XMLHttpRequest();
-  request.addEventListener('readystatechange', function(){
+  request.addEventListener('readystatechange', function () {
     console.log(event);
   });
   request.open('POST', 'connect4.pienter.space/api/auth/register');
@@ -61,4 +70,4 @@ BtnRegister.addEventListener('click', toggleForm);
 BtnLogin.addEventListener('click', toggleForm);
 Login.addEventListener('submit', login);
 Register.addEventListener('submit', register);
-console.log("123");
+Login.addEventListener('input', hideLoginAlert);

@@ -2,13 +2,23 @@ var Register = document.querySelector('.Form-register');
 var Login = document.querySelector('.Form-login');
 var BtnRegister = document.querySelector('#Register');
 var BtnLogin = document.querySelector('#Login');
+var loginAlert = document.querySelector('.login-alert');
 
 function toggleForm() {
   Register.classList.toggle('inactive');
   Login.classList.toggle('inactive');
 }
 
-function getFormData(event) {
+function hideLoginAlert() {
+  loginAlert.classList.add('inactive');
+}
+
+function showLoginAlert(content) {
+  loginAlert.textContent = content;
+  loginAlert.classList.remove('inactive');
+}
+
+function getFormData() {
   var inputFields = Login.querySelectorAll('input');
   var formData = {};
   inputFields.forEach(function (inputField) {
@@ -21,13 +31,13 @@ function handleLoginRequest(event) {
   var request = event.target;
 
   if (request.readyState === 4) {
+    var response = JSON.parse(request.responseText);
+
     if (request.status >= 200 && request.status < 300) {
       console.log('succes');
       console.log(request);
-    } else {
-      console.log('error');
-      console.log(request);
-      window.alert("Login failed, try again");
+    } else if (request.status === 401) {
+      showLoginAlert(response.error);
     }
   }
 }
@@ -60,5 +70,5 @@ BtnRegister.addEventListener('click', toggleForm);
 BtnLogin.addEventListener('click', toggleForm);
 Login.addEventListener('submit', login);
 Register.addEventListener('submit', register);
-console.log("123");
+Login.addEventListener('input', hideLoginAlert);
 //# sourceMappingURL=login.js.map
