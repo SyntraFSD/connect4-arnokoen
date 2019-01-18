@@ -30,7 +30,6 @@ function getFormData() {
     formData[inputField.name] = inputField.value;
   });
   return formData;
-
 }
 
 function handleLoginRequest(event) {
@@ -39,6 +38,15 @@ function handleLoginRequest(event) {
     const response = JSON.parse(request.responseText);
     if (request.status >= 200 && request.status < 300) {
       showLoginAlert('joepie je bent ingelogd', true);
+      /*
+        1 - check the response
+        2 - sla de token op in localstorage
+        3 - redirect naar closed.html
+      */
+      if(response.acces_token) {
+
+      }
+      const token = hasToken(response);
     } else if (request.status === 401) {
       showLoginAlert(response.error);
     }
