@@ -49,9 +49,10 @@ function handleLoginRequest(event) {
         3 - redirect naar closed.html
       */
 
-      if (response.acces_token) {}
-
-      var token = hasToken(response);
+      if (response.access_token) {
+        window.localStorage.setItem('token', response.access_token);
+        window.location = 'closed.html';
+      }
     } else if (request.status === 401) {
       showLoginAlert(response.error);
     }
