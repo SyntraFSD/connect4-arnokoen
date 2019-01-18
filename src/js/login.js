@@ -29,8 +29,8 @@ function getFormData() {
   inputFields.forEach(function (inputField) {
     formData[inputField.name] = inputField.value;
   });
+  return formData;
 
-  console.log(formData);
 }
 
 function handleLoginRequest(event) {
@@ -51,7 +51,7 @@ function login(event) {
   const request = new XMLHttpRequest();
   request.addEventListener('readystatechange', handleLoginRequest);
   request.open('POST', 'http://connect4.pienter.space/api/auth/login');
-  request.setRequestHeader('Content-Type', 'application.json');
+  request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify(formData));
   console.log(formData);
 }
@@ -64,7 +64,7 @@ function register(event) {
     console.log(event);
   });
   request.open('POST', 'connect4.pienter.space/api/auth/register');
-  request.setRequestHeader('Content-Type', 'application.json');
+  request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify(formData));
   console.log(formData);
 }
