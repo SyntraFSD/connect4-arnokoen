@@ -18,18 +18,25 @@ function getFormData(event){
   console.log(formData);
 }
 
+function handleLoginRequest(event){
+  const request = event.target;
+  if(request.readyState === 4) {
+    if(request.status >= 200 && request.status < 300){
+      console.log('succes');
+      console.log(request);
+    }else{
+      console.log('error');
+      console.log(request);
+      window.alert("Login failed, try again")
+    }
+  }
+}
+
 function login(event) {
   event.preventDefault();
   const formData = getFormData(Login);
   const request = new XMLHttpRequest();
-  request.addEventListener('readystatechange', function(){
-    const request = event.target;
-    console.log(request);
-    if(request.readystate === 4) {
-
-    }
-
-  });
+  request.addEventListener('readystatechange', handleLoginRequest);
   request.open('POST', 'http://connect4.pienter.space/api/auth/login');
   request.setRequestHeader('Content-Type', 'application.json');
   request.send(JSON.stringify(formData));
@@ -41,7 +48,7 @@ function register(event) {
   const formData = getFormData(register);
   const request = new XMLHttpRequest();
   request.addEventListener('readystatechange', function(){
-    console.log(event;)
+    console.log(event);
   });
   request.open('POST', 'connect4.pienter.space/api/auth/register');
   request.setRequestHeader('Content-Type', 'application.json');
