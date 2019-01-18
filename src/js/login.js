@@ -13,7 +13,12 @@ function hideLoginAlert() {
   loginAlert.classList.add('inactive');
 }
 
-function showLoginAlert(content) {
+function showLoginAlert(content, succes = false) {
+  if (succes) {
+    loginAlert.classList.add('success');
+  } else {
+    loginAlert.classList.remove('success');
+  }
   loginAlert.textContent = content;
   loginAlert.classList.remove('inactive');
 }
@@ -33,8 +38,7 @@ function handleLoginRequest(event) {
   if (request.readyState === 4) {
     const response = JSON.parse(request.responseText);
     if (request.status >= 200 && request.status < 300) {
-      console.log('succes');
-      console.log(request);
+      showLoginAlert('joepie je bent ingelogd', true);
     } else if (request.status === 401) {
       showLoginAlert(response.error);
     }
