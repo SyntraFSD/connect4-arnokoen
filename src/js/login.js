@@ -45,7 +45,11 @@ function handleLoginRequest(event) {
       */
       if (response.access_token) {
         window.localStorage.setItem('token', response.access_token);
-        window.location = 'closed.html';
+        setTimeout(function () {
+          window.location = 'closed.html';
+        } ,2000);
+
+      }
       }
     } else if (request.status === 401) {
       showLoginAlert(response.error);

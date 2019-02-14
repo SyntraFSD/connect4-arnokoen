@@ -1,5 +1,13 @@
 @import "normalize";
-@import "_variables";
-
+@import "variables";
 @import "header";
 @import "footer";
+
+body {
+  margin: 0;
+  font-family: $font;
+  position: relative;
+  min-height: 100%;
+  padding-bottom: $footer-height;
+  box-sizing: border-box;
+}

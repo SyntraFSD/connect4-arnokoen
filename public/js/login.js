@@ -39,7 +39,7 @@ function handleLoginRequest(event) {
   var request = event.target;
 
   if (request.readyState === 4) {
-    var response = JSON.parse(request.responseText);
+    var _response = JSON.parse(request.responseText);
 
     if (request.status >= 200 && request.status < 300) {
       showLoginAlert('joepie je bent ingelogd', true);
@@ -49,13 +49,15 @@ function handleLoginRequest(event) {
         3 - redirect naar closed.html
       */
 
-      if (response.access_token) {
-        window.localStorage.setItem('token', response.access_token);
-        window.location = 'closed.html';
+      if (_response.access_token) {
+        window.localStorage.setItem('token', _response.access_token);
+        setTimeout(function () {
+          window.location = 'closed.html';
+        }, 2000);
       }
-    } else if (request.status === 401) {
-      showLoginAlert(response.error);
     }
+  } else if (request.status === 401) {
+    showLoginAlert(response.error);
   }
 }
 
