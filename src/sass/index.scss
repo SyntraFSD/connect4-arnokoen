@@ -1,13 +1,14 @@
-@import "normalize";
-@import "_variables";
 
-@import "header";
-@import "footer";
 
-html{
-  height: 100%;
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
 
 body {
   margin: 0;
@@ -15,53 +16,15 @@ body {
   position: relative;
   min-height: 100%;
   padding-bottom: $footer-height;
-  box-sizing: border-box;
 }
 
-#board {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 90vh;
-  max-width: 700px;
-  height: auto;
-  margin: 0 auto;
-  display: flex;
-  border: 1px solid black;
+.hide{
+  display: none;
 }
 
-.row {
-
-  border: 1px solid black;
+.center{
   text-align: center;
-  line-height: 5rem;
 }
-
-.col{
-  border: solid 1px black;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: calc(90vw/7);
-  max-width: 90%;
-  height: calc(90vw/7);
-  max-height: 90%;
-
-}
-
-.col.red{
-  background-color: red;
-}
-
-.col.yellow{
-  background-color: yellow;
-}
-
-.col.empty{
-  background-color: navajowhite;
-}
-
-
 
 
 

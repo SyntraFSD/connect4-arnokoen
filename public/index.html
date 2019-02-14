@@ -7,7 +7,7 @@
 
     <title>The HTML5 Herald</title>
 
-    <link rel="stylesheet" href="css/index.css?v=1.0">
+    <link rel="stylesheet" href="css/game.css?v=1.0">
 
 </head>
 
@@ -20,34 +20,30 @@
         Connect 4
     </a>
     <nav class="Header-links--desktop">
-        <a class="Header-links--desktop-link" href="">
+        <a class="Header-links--desktop-link" href="stats.html">
             Stats
         </a>
         <a class="Header-links--desktop-link" href="login.html">
             Login
         </a>
     </nav>
-
     <nav class="Header-links--mobile">
+        <a class="Header-links--mobile-hamburger">
+            <div>
+            </div>
+        </a>
 
-        <div class="Header-links--mobile-hamburger">
-        <div class="Header-links--mobile-hamburger-lijn"> </div>
-        </div>
-         <div class="Header-links--mobile-dropdown inactive">
-            <a class="Header-links--mobile-dropdown-link" href="">
+        <div class="Header-links--mobile-dropdown inactive">
+            <a class="Header-links--mobile-dropdown-link" href="stats.html">
                 Stats
             </a>
             <a class="Header-links--mobile-dropdown-link" href="login.html">
                 Login
             </a>
-    </div>
+        </div>
     </nav>
 </header>
 <main>
-    <div class="Slider">
-
-    </div>
-
     <div id="board">
         <div class="col">
             <div class="row empty"></div>
@@ -82,20 +78,20 @@
             <div class="row empty"></div>
         </div>
         <div class="col">
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
+            <div class="row yellow"></div>
+            <div class="row yellow"></div>
+            <div class="row yellow"></div>
+            <div class="row yellow"></div>
+            <div class="row yellow"></div>
+            <div class="row yellow"></div>
         </div>
         <div class="col">
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
-            <div class="row empty"></div>
+            <div class="row red"></div>
+            <div class="row red"></div>
+            <div class="row red"></div>
+            <div class="row red"></div>
+            <div class="row red"></div>
+            <div class="row red"></div>
         </div>
         <div class="col">
             <div class="row empty"></div>
@@ -106,11 +102,10 @@
             <div class="row empty"></div>
         </div>
     </div>
-    
 </main>
 <footer class="Footer">
 
 </footer>
-<script src="js/index.js"></script>
+<script src="js/game.js"></script>
 </body>
 </html>
