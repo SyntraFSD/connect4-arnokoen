@@ -1,2 +1,0 @@
-
-//# sourceMappingURL=closed.js.map
