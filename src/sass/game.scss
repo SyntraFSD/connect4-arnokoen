@@ -19,6 +19,13 @@ main {
     max-width: $maxBoardWidth;
     border: solid 1px black;
 
+    &.red .col:hover::before{
+      background-color: indianred;
+    }
+    &.yellow .col:hover::before{
+      background-color: yellow;
+    }
+
     .row {
       box-sizing: border-box;
       border: solid 1px black;
@@ -69,6 +76,7 @@ main {
         border-radius: 50%;
       }
     }
+
   }
 }
 
