@@ -1,0 +1,22 @@
+.formContainer{
+  max-width: 25rem;
+  width: 100%;
+  background-color: #c3c3c3;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  .form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 15rem;
+    padding: 2rem 0;
+    margin: 0 auto;
+
+    input{
+      margin-bottom: .5rem;
+    }
+  }
+}

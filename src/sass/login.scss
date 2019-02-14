@@ -1,0 +1,20 @@
+@import "normalize";
+@import "variables";
+@import "main";
+@import "header";
+@import "footer";
+@import "form";
+
+.Login{
+  &-alert{
+    background-color: red;
+    border: 2px solid darkred;
+    border-radius: .3rem;
+    color: white;
+    padding: .5rem;
+    &.success{
+      background-color: green;
+      border: 2px solid darkgreen;
+    }
+  }
+}
