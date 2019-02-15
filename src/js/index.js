@@ -59,16 +59,17 @@ function changeTurn(state){
 }, false);
 console.log(blabla);*/
 
-function changeBoard(state, boardColumn) {
+function checkEmpty(state, boardColumn) {
   const newState = state;
-  for (let i = 0; i < boardColumn; i++){
-    console.log('aaa');
-  }
-
-  /*const tile = boardColumn.reduce(function(acc, value){
-    return value;
-  }, 0);
-  console.log(tile);*/
+  const checkEmptyTile = boardColumn.reduce(function (emptyIndex, row, rowIndex) {
+    if (emptyIndex === false) {
+      if (row === 'empty') {
+        return rowIndex;
+      }
+    }
+    return emptyIndex;
+  }, false);
+  console.log(checkEmptyTile);
 }
 
 function checkColumn(event) {
@@ -78,11 +79,19 @@ function checkColumn(event) {
     const colElementDataset = colElement.dataset.index;
     console.log(colElementDataset);
     const boardColumn = newState.board[colElementDataset];
-    console.log(boardColumn)
-    changeBoard(boardColumn);
+    console.log(boardColumn);
+    checkEmpty(state, boardColumn);
+    console.log(fillColumn());
+
   }
 }
+
+function fillColumn(emptyIndex, rowIndex) {
+
+}
+
 
 
 mainElement.addEventListener('click', checkColumn);
 drawBoard(state.board, state.turn, mainElement);
+
