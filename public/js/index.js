@@ -50,6 +50,19 @@ function changeTurn(state) {
 console.log(blabla);*/
 
 
+function changeBoard(state, boardColumn) {
+  var newState = state;
+
+  for (var i = 0; i < boardColumn; i++) {
+    console.log('aaa');
+  }
+  /*const tile = boardColumn.reduce(function(acc, value){
+    return value;
+  }, 0);
+  console.log(tile);*/
+
+}
+
 function checkColumn(event) {
   var newState = state;
 
@@ -57,7 +70,9 @@ function checkColumn(event) {
     var colElement = event.target.closest('.col');
     var colElementDataset = colElement.dataset.index;
     console.log(colElementDataset);
-    console.log(newState.board.indexOf(colElementDataset));
+    var boardColumn = newState.board[colElementDataset];
+    console.log(boardColumn);
+    changeBoard(boardColumn);
   }
 }
 

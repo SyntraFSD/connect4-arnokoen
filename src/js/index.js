@@ -59,14 +59,30 @@ function changeTurn(state){
 }, false);
 console.log(blabla);*/
 
+function changeBoard(state, boardColumn) {
+  const newState = state;
+  for (let i = 0; i < boardColumn; i++){
+    console.log('aaa');
+  }
+
+  /*const tile = boardColumn.reduce(function(acc, value){
+    return value;
+  }, 0);
+  console.log(tile);*/
+}
+
 function checkColumn(event) {
   let newState = state;
   if (event.target.matches('.col') || event.target.matches('.row')){
     const colElement = event.target.closest('.col');
     const colElementDataset = colElement.dataset.index;
     console.log(colElementDataset);
-    console.log(newState.board.indexOf(colElementDataset));
+    const boardColumn = newState.board[colElementDataset];
+    console.log(boardColumn)
+    changeBoard(boardColumn);
   }
 }
+
+
 mainElement.addEventListener('click', checkColumn);
 drawBoard(state.board, state.turn, mainElement);
