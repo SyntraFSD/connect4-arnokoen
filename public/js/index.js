@@ -1,4 +1,4 @@
-//html elements
+// ------------------------- MODEL
 var mainElement = document.querySelector('main');
 var drawMessage = document.querySelector('.drawMessage');
 initGameState();
@@ -10,28 +10,16 @@ var state = {
   board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
 };
 
-function generateBoardHtml(board) {
-  return board.reduce(function (colsHtml, col, colIndex) {
-    var colHtml = '<div class="col" data-index="' + colIndex + '">';
-    colHtml += col.reduce(function (rowsHtml, row, rowIndex) {
-      return '<div class="row ' + row + '"></div>' + rowsHtml;
-    }, '');
-    colHtml += '</div>';
-    return colsHtml + colHtml;
-  }, '');
-}
+function initGameState() {
+  state = {
+    turn: 'yellow',
+    winner: false,
+    winnerColor: null,
+    full: false,
+    board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
+  };
+} // ------------------------- UPDATE
 
-function drawBoard(board, turn, htmlElement, boardElement) {
-  if (!boardElement) {
-    boardElement = document.createElement('div');
-  }
-
-  boardElement.id = 'board';
-  boardElement.classList.add(turn);
-  boardElement.innerHTML = generateBoardHtml(board);
-  htmlElement.appendChild(boardElement);
-  return boardElement;
-}
 
 function changeTurn(state, col) {
   if (state.turn === 'yellow') {
@@ -82,22 +70,36 @@ function fullCheck(board) {
   return checkFull;
 }
 
-function initGameState() {
-  state = {
-    turn: 'yellow',
-    winner: false,
-    winnerColor: null,
-    full: false,
-    board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
-  };
-}
-
 function fullCheckChecker(state) {
   if (fullCheck(state.board) === true) {
     state.full = true;
   }
 
   return state;
+} // ------------------------- VIEW
+
+
+function generateBoardHtml(board) {
+  return board.reduce(function (colsHtml, col, colIndex) {
+    var colHtml = '<div class="col" data-index="' + colIndex + '">';
+    colHtml += col.reduce(function (rowsHtml, row, rowIndex) {
+      return '<div class="row ' + row + '"></div>' + rowsHtml;
+    }, '');
+    colHtml += '</div>';
+    return colsHtml + colHtml;
+  }, '');
+}
+
+function drawBoard(board, turn, htmlElement, boardElement) {
+  if (!boardElement) {
+    boardElement = document.createElement('div');
+  }
+
+  boardElement.id = 'board';
+  boardElement.classList.add(turn);
+  boardElement.innerHTML = generateBoardHtml(board);
+  htmlElement.appendChild(boardElement);
+  return boardElement;
 }
 
 function stateMessage(state) {
@@ -108,7 +110,8 @@ function stateMessage(state) {
   }
 
   return "";
-}
+} // ------------------------- EVENT
+
 
 var htmlboard = drawBoard(state.board, state.turn, mainElement);
 htmlboard.addEventListener('click', function (event) {
