@@ -3,95 +3,80 @@
 
 const mainElement = document.querySelector('main');
 const drawMessage = document.querySelector('.drawMessage');
-initGameState();
-let state = {
-  turn: 'yellow',
-  winner: false,
-  winnerColor: null,
-  full: false,
-  board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-        ]
-};
+
+let htmlBoard = null;
+let state = null;
+
+// ------------------------- UPDATE
+
+function nState(state){
+  return JSON.parse(JSON.stringify(state));
+}
 
 function initGameState() {
-  state = {
+  return {
     turn: 'yellow',
     winner: false,
     winnerColor: null,
     full: false,
     board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-          ]
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+    ]
   };
 }
 
-// ------------------------- UPDATE
-
-function changeTurn(state, col) {
+function toggleColor(turn) {
   if (state.turn === 'yellow') {
-    state.turn = 'red';
-    htmlboard.classList.remove('yellow');
-    htmlboard.classList.add('red');
+    return 'red';
   } else {
-    state.turn = 'yellow';
-    htmlboard.classList.remove('red');
-    htmlboard.classList.add('yellow');
+    return 'yellow';
   }
-
-  return state;
+  /*
+  htmlBoard.classList.remove('yellow');
+  htmlBoard.classList.add('red');*/
 }
 
-function dropStone(colList, state) {
-  const indexEmpty = state.board[colList.dataset.index].reduce(function (acc, value, index) {
-    if (acc === false) {
-      if (value === 'empty') {
+function firstEmptyRow(col) {
+  return col.reduce(function (acc, value, index) {
+    if (acc === false && value === 'empty') {
         return index;
-      } else {
-        return acc;
       }
-    } else {
-      return acc;
-    }
+        return acc;
   }, false);
+}
 
-  if (indexEmpty === false) {
+function dropStone(colElement, state) {
+  const newState = nState(state);
+  const colIndex = parseInt(colElement.dataset.index);
+  const rowIndex = firstEmptyRow(state.board[colIndex]);
+  if (rowIndex === false) {
     return false;
   } else {
-    state.board[colList.dataset.index][indexEmpty] = state.turn;
+    newState.board[colElement.dataset.index][rowIndex] = newState.turn;
     console.log(state.board);
-    return state;
+    return newState;
   }
 }
 
 function fullCheck(board) {
-  const checkFull = board.reduce(function (colsHtml, col, colIndex) {
-    return col.reduce(function (acc, row, rowIndex) {
-      if (row === 'empty') {
-        return false;
-      } else {
-        return acc;
-      }
-    }, colsHtml);
+  const boardFull = board.reduce(function (acc, col) {
+    if (acc) {
+      return col.slice(-1)[0] !== 'empty';
+    }
+    return acc;
   }, true);
-  return checkFull;
+  return boardFull;
 }
 
 function fullCheckChecker(state) {
   if (fullCheck(state.board) === true) {
     state.full = true;
   }
-
   return state;
 }
 
@@ -132,25 +117,31 @@ function stateMessage(state) {
 
 // ------------------------- EVENT
 
-let htmlboard = drawBoard(state.board, state.turn, mainElement);
-htmlboard.addEventListener('click', function (event) {
-  const colList = event.target.closest('.col');
+
+htmlBoard.addEventListener('click', function (event) {
 
   if (event.target.matches('.col,.row')) {
-    const newDrop = dropStone(colList, state);
+    const colElement = event.target.closest('.col');
+    const newBoard = dropStone(colElement, state);
 
-    if (newDrop) {
-      state = newDrop;
-      state = fullCheckChecker(state);
-      state = changeTurn(state);
+    if (newBoard) {
+      state.board = newBoard;
+      state.full = fullCheck(state.board);
+      state.turn = toggleColor(turn);
       drawMessage.textContent = stateMessage(state);
-      drawBoard(state.board, state.turn, mainElement, htmlboard);
+      drawBoard(state.board, state.turn, mainElement, htmlBoard);
     } else if (state.full === true) {
       initGameState();
-      drawBoard(state.board, state.turn, mainElement, htmlboard);
+      drawBoard(state.board, state.turn, mainElement, htmlBoard);
       drawMessage.textContent = stateMessage(state);
     }
   }
 });
+
+window.addEventListener('load', function () {
+  state = initGameState();
+});
+
+htmlBoard = drawBoard(state.board, state.turn, mainElement);
 
 //# sourceMappingURL=game.js.map
