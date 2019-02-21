@@ -21,6 +21,7 @@ function generateBoardHtml(board) {
 }
 
 function drawBoard(board, turn, htmlElement) {
+  htmlElement.innerHTML = "";
   var boardElement = document.createElement('div');
   boardElement.id = 'board';
   boardElement.classList.add(turn);
@@ -61,10 +62,10 @@ function checkEmpty(state, boardColumn) {
 
     return emptyIndex;
   }, false);
-  console.log(checkEmptyTile);
+  return checkEmptyTile;
 }
 
-function checkColumn(event) {
+function checkColumn(event, state) {
   var newState = state;
 
   if (event.target.matches('.col') || event.target.matches('.row')) {
@@ -73,13 +74,14 @@ function checkColumn(event) {
     console.log(colElementDataset);
     var boardColumn = newState.board[colElementDataset];
     console.log(boardColumn);
-    checkEmpty(state, boardColumn);
-    console.log(fillColumn());
+    var indexToFill = checkEmpty(state, boardColumn);
+    var board = document.querySelector('#board');
+    drawBoard(state.board, state.turn, mainElement);
   }
 }
 
-function fillColumn(emptyIndex, rowIndex) {}
-
-mainElement.addEventListener('click', checkColumn);
+mainElement.addEventListener('click', function (event) {
+  checkColumn(event, state);
+});
 drawBoard(state.board, state.turn, mainElement);
 //# sourceMappingURL=index.js.map

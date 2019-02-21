@@ -3,6 +3,7 @@ const hamburger = document.querySelector(".Header-links--mobile-hamburger");
 const mainElement = document.querySelector("main");
 
 
+
 hamburger.addEventListener("click", function () {
   mobileDropdown.classList.toggle("inactive");
 });
@@ -32,6 +33,7 @@ function generateBoardHtml(board) {
 }
 
 function drawBoard(board, turn, htmlElement) {
+htmlElement.innerHTML="";
   const boardElement = document.createElement('div');
   boardElement.id = 'board';
   boardElement.classList.add(turn);
@@ -69,10 +71,10 @@ function checkEmpty(state, boardColumn) {
     }
     return emptyIndex;
   }, false);
-  console.log(checkEmptyTile);
+  return checkEmptyTile;
 }
 
-function checkColumn(event) {
+function checkColumn(event,state) {
   let newState = state;
   if (event.target.matches('.col') || event.target.matches('.row')){
     const colElement = event.target.closest('.col');
@@ -80,18 +82,14 @@ function checkColumn(event) {
     console.log(colElementDataset);
     const boardColumn = newState.board[colElementDataset];
     console.log(boardColumn);
-    checkEmpty(state, boardColumn);
-    console.log(fillColumn());
-
+    const indexToFill = checkEmpty(state, boardColumn);
+    const board = document.querySelector('#board');
+    drawBoard(state.board, state.turn, mainElement);
   }
 }
 
-function fillColumn(emptyIndex, rowIndex) {
-
-}
-
-
-
-mainElement.addEventListener('click', checkColumn);
+mainElement.addEventListener('click', function (event) {
+  checkColumn(event,state);
+});
 drawBoard(state.board, state.turn, mainElement);
 
