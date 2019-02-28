@@ -2,7 +2,7 @@
 // ------------------------- MODEL
 
 const mainElement = document.querySelector('main');
-const drawMessage = document.querySelector('.drawMessage');
+const messageElement = document.querySelector('.drawMessage');
 
 let htmlBoard = null;
 let state = null;
@@ -26,12 +26,12 @@ function initGameState() {
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ]
+    ],
   };
 }
 
-function toggleColor(turn) {
-  if (state.turn === 'yellow') {
+function toggleColor(color) {
+  if (color === 'yellow') {
     return 'red';
   } else {
     return 'yellow';
@@ -73,19 +73,12 @@ function fullCheck(board) {
   return boardFull;
 }
 
-function fullCheckChecker(state) {
-  if (fullCheck(state.board) === true) {
-    state.full = true;
-  }
-  return state;
-}
-
 // ------------------------- VIEW
 
 function generateBoardHtml(board) {
   return board.reduce(function (colsHtml, col, colIndex) {
     let colHtml = '<div class="col" data-index="' + colIndex + '">';
-    colHtml += col.reduce(function (rowsHtml, row, rowIndex) {
+    colHtml += col.reduce(function (rowsHtml, row) {
       return '<div class="row ' + row + '"></div>' + rowsHtml;
     }, '');
     colHtml += '</div>';
@@ -93,55 +86,64 @@ function generateBoardHtml(board) {
   }, '');
 }
 
-function drawBoard(board, turn, htmlElement, boardElement) {
-  if (!boardElement) {
-    boardElement = document.createElement('div');
-  }
-
-  boardElement.id = 'board';
+function drawTurn(boardElement, turn){
   boardElement.classList.add(turn);
-  boardElement.innerHTML = generateBoardHtml(board);
-  htmlElement.appendChild(boardElement);
-  return boardElement;
+  boardElement.classList.remove(toggleColor(turn));
 }
 
 function stateMessage(state) {
   if (state.full === true) {
-    return "gelijk";
+    return 'gelijk ';
   } else if (state.winner === true) {
-    return "winner " + state.winnerColor;
+    return 'winner ' + state.winnerColor;
   }
 
-  return "";
+  return '';
+}
+
+function drawMessage(state) {
+  messageElement.textContent = stateMessage(state);
+}
+
+function drawBoard(state, htmlElement, boardElement) {
+  if (!boardElement) {
+    boardElement = document.createElement('div');
+    boardElement.id = 'board';
+  }
+  drawTurn(boardElement, state.turn);
+  boardElement.innerHTML = generateBoardHtml(state.board);
+  htmlElement.appendChild(boardElement);
+  drawMessage(state);
+  return boardElement;
 }
 
 // ------------------------- EVENT
 
 
-htmlBoard.addEventListener('click', function (event) {
-
-  if (event.target.matches('.col,.row')) {
-    const colElement = event.target.closest('.col');
-    const newBoard = dropStone(colElement, state);
-
-    if (newBoard) {
-      state.board = newBoard;
-      state.full = fullCheck(state.board);
-      state.turn = toggleColor(turn);
-      drawMessage.textContent = stateMessage(state);
-      drawBoard(state.board, state.turn, mainElement, htmlBoard);
-    } else if (state.full === true) {
-      initGameState();
-      drawBoard(state.board, state.turn, mainElement, htmlBoard);
-      drawMessage.textContent = stateMessage(state);
-    }
-  }
-});
 
 window.addEventListener('load', function () {
   state = initGameState();
+  htmlBoard = drawBoard(state, mainElement);
+
+  htmlBoard.addEventListener('click', function (event) {
+
+    if (event.target.matches('.col,.row')) {
+      const colElement = event.target.closest('.col');
+      const newState = dropStone(colElement, state);
+
+      if (newState) {
+        state = newState;
+        state.full = fullCheck(state.board);
+        state.turn = toggleColor(state.turn);
+        drawBoard(state, mainElement, htmlBoard);
+      } else if (state.full === true) {
+        state = initGameState();
+        drawBoard(state, mainElement, htmlBoard);
+      }
+    }
+  });
 });
 
-htmlBoard = drawBoard(state.board, state.turn, mainElement);
+
 
 //# sourceMappingURL=game.js.map
