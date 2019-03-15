@@ -63,6 +63,7 @@ function fullCheck(board) {
     return acc;
   }, true);
   return boardFull;
+<<<<<<< Updated upstream
 }
 
 function fullCheckChecker(state) {
@@ -71,6 +72,8 @@ function fullCheckChecker(state) {
   }
 
   return state;
+=======
+>>>>>>> Stashed changes
 } // ------------------------- VIEW
 
 
@@ -99,7 +102,11 @@ function drawBoard(board, turn, htmlElement, boardElement) {
 
 function stateMessage(state) {
   if (state.full === true) {
+<<<<<<< Updated upstream
     return "gelijk";
+=======
+    return 'gelijk ';
+>>>>>>> Stashed changes
   } else if (state.winner === true) {
     return "winner " + state.winnerColor;
   }
@@ -128,6 +135,27 @@ htmlBoard.addEventListener('click', function (event) {
 });
 window.addEventListener('load', function () {
   state = initGameState();
+<<<<<<< Updated upstream
 });
 htmlBoard = drawBoard(state.board, state.turn, mainElement);
+=======
+  htmlBoard = drawBoard(state, mainElement);
+  htmlBoard.addEventListener('click', function (event) {
+    if (event.target.matches('.col,.row')) {
+      var colElement = event.target.closest('.col');
+      var newState = dropStone(colElement, state);
+
+      if (newState) {
+        state = newState;
+        state.full = fullCheck(state.board);
+        state.turn = toggleColor(state.turn);
+        drawBoard(state, mainElement, htmlBoard);
+      } else if (state.full === true) {
+        state = initGameState();
+        drawBoard(state, mainElement, htmlBoard);
+      }
+    }
+  });
+});
+>>>>>>> Stashed changes
 //# sourceMappingURL=index.js.map
