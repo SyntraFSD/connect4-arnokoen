@@ -11,6 +11,7 @@
     "radix": 0,
     "prefer-template": 0,
     "prefer-arrow-callback": 0,
-    "no-console": 0
+    "no-console": 0,
+    "no-shadow": 0
   }
 }

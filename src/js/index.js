@@ -36,9 +36,6 @@ function toggleColor(color) {
   } else {
     return 'yellow';
   }
-  /*
-  htmlBoard.classList.remove('yellow');
-  htmlBoard.classList.add('red');*/
 }
 
 function firstEmptyRow(col) {
@@ -72,6 +69,24 @@ function fullCheck(board) {
   }, true);
   return boardFull;
 }
+
+function hasFourInARow(colArray){
+  console.log(colArray.reduce(function (acc, color, index, col){
+    if (index !== 0){
+      if (acc >= 4){
+        return acc;
+      }
+      if (color === col[index - 1] && color !== 'empty') {
+        return acc + 1;
+      }
+    }
+    else {
+      return 1;
+    }
+  }, 0));
+}
+
+
 
 // ------------------------- VIEW
 
@@ -144,6 +159,6 @@ window.addEventListener('load', function () {
   });
 });
 
-
+hasFourInARow(['red', 'red', 'red', 'red', 'empty', 'empty']);
 
 //# sourceMappingURL=game.js.map

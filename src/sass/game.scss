@@ -59,7 +59,7 @@ main {
       }
 
       &.red::before {
-        background-color: indianred;
+        background-color: red;
       }
 
       &.yellow::before {
@@ -84,6 +84,9 @@ main {
   }
 }
 
+.drawMessage {
+  color: white;
+}
 
 
 
