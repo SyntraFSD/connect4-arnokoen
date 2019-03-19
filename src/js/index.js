@@ -26,7 +26,7 @@ function initGameState() {
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ]
+    ],
   };
 }
 
@@ -38,15 +38,15 @@ function toggleColor(turn) {
   }
   /*
   htmlBoard.classList.remove('yellow');
-  htmlBoard.classList.add('red');*/
+  htmlBoard.classList.add('red'); */
 }
 
 function firstEmptyRow(col) {
   return col.reduce(function (acc, value, index) {
     if (acc === false && value === 'empty') {
-        return index;
-      }
-        return acc;
+      return index;
+    }
+    return acc;
   }, false);
 }
 

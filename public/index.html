@@ -45,10 +45,65 @@
 </header>
 <main>
 <h1 class="drawMessage"> </h1>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <div id="game">
+    <div id="board" :class="turn">
+      <div v-for="(col, colIndex) in board" class="col" @click="colClick($event, colIndex)">
+        <div v-for="(row, rowIndex) in col.slice().reverse()" :class="['row', row]"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleColor(color) {
+      if (color === 'yellow') {
+        return 'red';
+      } else {
+        return 'yellow';
+      }}
+
+    function firstEmptyRow(col) {
+      return col.reduce(function (emptyIndex, row, rowIndex) {
+        if (emptyIndex === false && row === 'empty') {
+          return rowIndex;
+        }
+
+        return emptyIndex;
+      }, false);
+    }
+
+    new Vue({
+      el: '#game',
+      data: function() {
+        return {
+          board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+            ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+          ],
+          turn: 'yellow',
+        }
+      },
+      methods:
+        {
+          colClick: function(event, colIndex){
+            const rowIndex = firstEmptyRow(this.board[colIndex]);
+            if (rowIndex !== false){
+              this.board[colIndex][rowIndex] = this.turn;
+              this.turn = toggleColor(this.turn)
+            }
+          },
+
+        }
+    })
+  </script>
 </main>
 <footer class="Footer">
 
 </footer>
-<script src="js/index.js"></script>
 </body>
 </html>
