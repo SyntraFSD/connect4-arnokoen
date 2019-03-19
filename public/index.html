@@ -46,6 +46,7 @@
 <main>
 <h1 class="drawMessage"> </h1>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <div id="game">
     <div id="board" :class="turn">
@@ -94,7 +95,19 @@
             const rowIndex = firstEmptyRow(this.board[colIndex]);
             if (rowIndex !== false){
               this.board[colIndex][rowIndex] = this.turn;
-              this.turn = toggleColor(this.turn)
+              this.turn = toggleColor(this.turn);
+
+              axios.post('http://localhost:8000/updateBoard/{row}/{col}/{turn}', {
+                row: rowIndex,
+                col: colIndex,
+                turn: this.turn
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
             }
           },
 

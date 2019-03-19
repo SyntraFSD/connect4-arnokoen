@@ -99,12 +99,12 @@ function drawBoard(board, turn, htmlElement, boardElement) {
 
 function stateMessage(state) {
   if (state.full === true) {
-    return "gelijk";
+    return 'gelijk';
   } else if (state.winner === true) {
-    return "winner " + state.winnerColor;
+    return 'winner ' + state.winnerColor;
   }
 
-  return "";
+  return '';
 } // ------------------------- EVENT
 
 
